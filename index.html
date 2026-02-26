@@ -6,45 +6,208 @@
     <title>Keiron Street | kistreet-rgb</title>
     <style>
         :root {
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text: #f1f5f9;
+            --uofa-green: #007C41; /* Primary Green */
+            --uofa-gold: #FFDB05;  /* Primary Gold */
+            --bg-light: #f8f9fa;
+            --text-dark: #2d3748;
+            --card-bg: #ffffff;
         }
-        body { font-family: 'Inter', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
-        header { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1531259683007-016a7b628fc3?q=80&w=1000&auto=format&fit=crop'); background-size: cover; text-align: center; border-bottom: 2px solid var(--accent); }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 3rem 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-        .card { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; transition: transform 0.2s; border: 1px solid #334155; }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        h1 { font-size: 3.5rem; margin: 0; color: var(--accent); }
-        .status-badge { background: #0ea5e9; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold; }
-        .course-list { column-count: 2; list-style: none; padding: 0; }
-        .course-list li::before { content: "▹ "; color: var(--accent); }
-        footer { text-align: center; padding: 2rem; opacity: 0.7; font-size: 0.9rem; }
+        
+        body { 
+            font-family: 'Inter', 'Segoe UI', sans-serif; 
+            background: var(--bg-light); 
+            color: var(--text-dark); 
+            margin: 0; 
+            line-height: 1.6; 
+        }
+
+        /* Top Bar for Co-op Logo */
+        .top-bar {
+            background-color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: flex-start;
+            border-bottom: 4px solid var(--uofa-gold);
+        }
+        
+        .https://uploads.onecompiler.io/44eqw6xup/44eqw36dg/coop.png {
+            height: 50px;
+            width: 150px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #64748b;
+            border: 1px dashed #94a3b8;
+        }
+
+        /* Hero Header */
+        header { 
+            background-color: var(--uofa-green);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center; 
+        }
+
+        h1 { 
+            font-size: 3.5rem; 
+            margin: 0; 
+            color: white; 
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--uofa-gold);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-badge { 
+            background: var(--uofa-gold); 
+            color: var(--uofa-green); 
+            padding: 0.5rem 1.2rem; 
+            border-radius: 4px; 
+            font-size: 1rem; 
+            font-weight: bold; 
+            display: inline-block;
+        }
+
+        .container { 
+            width: 90%; 
+            max-width: 1100px; 
+            margin: auto; 
+            padding: 3rem 0; 
+        }
+
+        h2 {
+            color: var(--uofa-green);
+            border-bottom: 2px solid var(--uofa-gold);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Project Cards */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 1.5rem;
+        }
+
+        .card { 
+            background: var(--card-bg); 
+            padding: 1.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--uofa-green);
+            transition: transform 0.2s; 
+        }
+
+        .card:hover { 
+            transform: translateY(-5px); 
+        }
+
+        /* Campus Images Section */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 2px dashed #94a3b8;
+        }
+
+        /* Lists */
+        .course-list { 
+            column-count: 2; 
+            list-style: none; 
+            padding: 0; 
+        }
+
+        .course-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .course-list li::before { 
+            content: "■ "; 
+            color: var(--uofa-gold); 
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 2rem; 
+            background-color: var(--uofa-green);
+            color: white;
+            font-size: 0.9rem; 
+        }
     </style>
 </head>
 <body>
 
+<div class="top-bar">
+    <img src="https://uploads.onecompiler.io/44eqw6xup/44eqw36dg/gear_logo.png" alt="Gear Logo" style="height:50px; width:auto;">
+</div>
+
 <header>
     <h1>KEIRON STREET</h1>
-    <p>Mechatronics & Robotics Co-op Student | University of Alberta</p>
-    <div style="margin-top: 20px;">
+    <p class="hero-subtitle">Mechatronics & Robotics Co-op Student | University of Alberta</p>
+    <div>
         <span class="status-badge">Available for 8-Month Co-op: May 2026</span>
+        <div style="margin-top: 1rem;">
+    <a href="C:\Users\argon\OneDrive\Desktop\Vscode\Website\Kistreet_1_page_Coop_Resume_v2.pdf" download 
+       style="background-color: var(--uofa-gold); 
+              color: var(--uofa-green); 
+              padding: 0.6rem 1.5rem; 
+              border-radius: 4px; 
+              font-weight: bold; 
+              text-decoration: none; 
+              display: inline-block;">
+        Download Resume
+    </a>
+</div>
+        
     </div>
+
 </header>
 
 <div class="container">
+    
     <section>
+        <h2>Campus Environment</h2>
+        <p>Replace these placeholders with your photos of the engineering buildings (e.g., DICE, ETLC, NREF).</p>
+        <div class="image-gallery">
+            <div class="img-placeholder">[ Insert Engineering Building 1 ]</div>
+            <div class="img-placeholder">[ Insert Engineering Building 2 ]</div>
+            <div class="img-placeholder">[ Insert Engineering Building 3 ]</div>
+        </div>
+    </section>
+
+    <section style="margin-top: 4rem;">
         <h2>Technical Projects</h2>
         <div class="grid">
             <div class="card">
-                <h3>Warehouse Delivery Robot</h3>
+                <h3 style="color: var(--uofa-green); margin-top: 0;">Warehouse Delivery Robot</h3>
                 <p><strong>MCTR 260 Design Project</strong></p>
                 <p>Developing an autonomous pizza-delivery robot utilizing the VDI 2206 design cycle. Focusing on path planning and sensor integration for obstacle avoidance.</p>
             </div>
             <div class="card">
-                <h3>Custom DAC Design</h3>
+                <h3 style="color: var(--uofa-green); margin-top: 0;">Custom DAC Design</h3>
+                <p>Engineered a Digital-to-Analog Converter focusing on precision signal output. Applied principles from Digital Logic and Signals & Systems.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--uofa-green); margin-top: 0;">Custom DAC Design</h3>
                 <p>Engineered a Digital-to-Analog Converter focusing on precision signal output. Applied principles from Digital Logic and Signals & Systems.</p>
             </div>
         </div>
@@ -55,20 +218,24 @@
         <div class="card">
             <ul class="course-list">
                 <li>Signals and Systems</li>
-                <li>Digital Logic Design</li>
+                <li>Object Oriented Programming</li>
                 <li>Thermal Fluids</li>
-                <li>Dynamics</li>
-                <li>Deformable Bodies</li>
-                <li>Mechatronics Design</li>
+                <li>2D and 3D Dynamics of Rigid Bodies</li>
+                <li>Mechanics of Deformable Bodies</li>
+                <li>Design For Manufacturability </li>
+                <li>Solidworks and FEA</li>
+                <li>Digital Logic/Microprocessor Design</li>
             </ul>
         </div>
     </section>
 
-    <section id="contact" style="margin-top: 4rem; text-align: center;">
+    <section id="contact" style="margin-top: 4rem; text-align: center; background: var(--card-bg); padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0;">
         <h2>Get In Touch</h2>
-        <p>Currently seeking technical roles in robotics, automation, or mechatronics systems.</p>
-        <p><strong>Email:</strong> Kistreet@ualberta.ca</p>
-        <p><strong>GitHub:</strong> github.com/kistreet-rgb</p>
+        <p>Currently seeking technical roles in robotics, automation, or mechatronics systems</p>
+        
+        <p><strong>GitHub:</strong><a href="github.com/kistreet-rgb" >Kistreet-rgb</a></p>
+        <p><strong>LinkedIn:</strong><a href="https://www.linkedin.com/in/keiron-street-468520358/"> Keiron-Street</a></p>
+        
     </section>
 </div>
 
