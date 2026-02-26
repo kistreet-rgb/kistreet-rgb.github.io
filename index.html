@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keiron Street | kistreet-rgb</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text: #f1f5f9;
+        }
+        body { font-family: 'Inter', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
+        header { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1531259683007-016a7b628fc3?q=80&w=1000&auto=format&fit=crop'); background-size: cover; text-align: center; border-bottom: 2px solid var(--accent); }
+        .container { width: 90%; max-width: 1100px; margin: auto; padding: 3rem 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; transition: transform 0.2s; border: 1px solid #334155; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        h1 { font-size: 3.5rem; margin: 0; color: var(--accent); }
+        .status-badge { background: #0ea5e9; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold; }
+        .course-list { column-count: 2; list-style: none; padding: 0; }
+        .course-list li::before { content: "▹ "; color: var(--accent); }
+        footer { text-align: center; padding: 2rem; opacity: 0.7; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>KEIRON STREET</h1>
+    <p>Mechatronics & Robotics Co-op Student | University of Alberta</p>
+    <div style="margin-top: 20px;">
+        <span class="status-badge">Available for 8-Month Co-op: May 2026</span>
+    </div>
+</header>
+
+<div class="container">
+    <section>
+        <h2>Technical Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Warehouse Delivery Robot</h3>
+                <p><strong>MCTR 260 Design Project</strong></p>
+                <p>Developing an autonomous pizza-delivery robot utilizing the VDI 2206 design cycle. Focusing on path planning and sensor integration for obstacle avoidance.</p>
+            </div>
+            <div class="card">
+                <h3>Custom DAC Design</h3>
+                <p>Engineered a Digital-to-Analog Converter focusing on precision signal output. Applied principles from Digital Logic and Signals & Systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="margin-top: 4rem;">
+        <h2>Current Academic Focus (Year 2, Term 4)</h2>
+        <div class="card">
+            <ul class="course-list">
+                <li>Signals and Systems</li>
+                <li>Digital Logic Design</li>
+                <li>Thermal Fluids</li>
+                <li>Dynamics</li>
+                <li>Deformable Bodies</li>
+                <li>Mechatronics Design</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact" style="margin-top: 4rem; text-align: center;">
+        <h2>Get In Touch</h2>
+        <p>Currently seeking technical roles in robotics, automation, or mechatronics systems.</p>
+        <p><strong>Phone:</strong> 825-975-9820</p>
+        <p><strong>GitHub:</strong> github.com/kistreet-rgb</p>
+    </section>
+</div>
+
+<footer>
+    &copy; 2026 Keiron Street | Built with kistreet-rgb
+</footer>
+
+</body>
+</html>
