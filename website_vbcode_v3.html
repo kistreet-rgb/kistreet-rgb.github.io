@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keiron Street | Mechatronics & Robotics Engineering</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           GLOBAL THEME VARIABLES
+           ========================================================= */
+        :root {
+            --bg-color: #0f172a;           
+            --surface-color: #1e293b;      
+            --primary-color: #38bdf8;      
+            --secondary-color: #818cf8;    
+            --text-main: #f8fafc;          
+            --text-muted: #94a3b8;         
+            
+            --font-main: 'Inter', sans-serif;
+            --font-heading: 'Montserrat', sans-serif;
+            
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        /* =========================================================
+           BASE STYLES & LAYOUT
+           ========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px; 
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* =========================================================
+           ANIMATIONS
+           ========================================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+           NAVIGATION & BUTTONS
+           ========================================================= */
+        nav {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* navigation logo: apply to <img> tags for small header logos
+           you can override size or border-radius with additional styles */
+        .nav-logo {
+            height: 100px;
+            width:auto;
+            border-radius: 8px;
+        }
+
+        /* team logo helper: small, responsive logo used inside cards/links */
+        .team-logo {
+            width: 64px;
+            height: auto;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        /* =========================================================
+           HERO SECTION
+           ========================================================= */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding-top: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .hero-image-container {
+            flex: 0 0 350px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover; 
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
+            background-color: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .hero-image-portrait {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ---------------------------------------------------------
+           utility helpers for image alignment/cropping
+           ---------------------------------------------------------
+           * .img-center       => centers image inside its container
+           * .img-cover        => object-fit: cover (fills & crops)
+           * .img-contain      => object-fit: contain (fits inside)
+           * .img-top/.img-bottom/.img-left/.img-right
+             => object-position adjustments
+           * .img-circle       => shortcut for border-radius:50%
+           * .img-responsive   => max-width:100%; height:auto
+           Usage:
+             <img src="..." class="img-responsive img-cover img-center" alt="...">
+           You can also combine with your own classes.
+        */
+        .img-center {
+            display: block;
+            margin: 0 auto;
+        }
+        .img-cover {
+            object-fit: cover;
+        }
+        .img-contain {
+            object-fit: contain;
+        }
+        .img-top { object-position: top; }
+        .img-bottom { object-position: bottom; }
+        .img-left { object-position: left; }
+        .img-right { object-position: right; }
+        .img-circle { border-radius: 50%; }
+        .img-responsive { max-width: 100%; height: auto; }
+
+        /* helpers to nudge/flex items horizontally */
+        .ml-auto { margin-left: auto; }   /* push element to the right in a flex container */
+        .mr-auto { margin-right: auto; }  /* push element to the left */
+
+
+        /* =========================================================
+           SPLIT LAYOUT (For "What is" & "Why I Chose" sections)
+           ========================================================= */
+        .split-layout {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .split-text {
+            flex: 1;
+            font-size: 1.1rem;
+        }
+
+        .split-media-container {
+            flex: 1;
+        }
+
+        .split-layout.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* Mobile Responsiveness for Flexbox Layouts */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 60px;
+            }
+            .hero-image-container {
+                flex: 0 0 auto;
+                margin-bottom: 30px;
+            }
+            .split-layout, .split-layout.reverse {
+                flex-direction: column;
+            }
+        }
+
+        /* =========================================================
+           GRID LAYOUTS & MEDIA BOXES
+           ========================================================= */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: var(--primary-color);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .media-box {
+            width: 100%;
+            height: 200px;
+            background-color: #334155;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .media-box img, .media-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Overrides for split-section media boxes */
+        .split-media-container .media-box {
+            height: 350px;
+            margin-bottom: 0;
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background-color: var(--surface-color);
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+        📷 Image & GIF Usage Guide
+        - Use the <img> tag with a valid src pointing to a file or URL.
+        - Relative paths are relative to this HTML file; e.g. "Photos/Logo/mylogo.png".
+        - GIFs work exactly the same: <img src="media/animation.gif" alt="animated gif">
+        - Provide a meaningful alt attribute for accessibility.
+        - Common classes for styling are defined in the CSS below:
+            * .nav-logo       -> small logo in the navigation bar
+            * .hero-image     -> large circular/rounded portrait
+            * .hero-image-portrait -> rectangular media boxes
+            * utility helpers for centering/cropping:
+                .img-center, .img-cover, .img-contain, .img-circle,
+                .img-top/.img-left/.img-right/.img-bottom
+        - Use these to adjust object-fit and position or to center an image.
+        - You can create your own classes or use inline styles to control size.
+        - Example:
+            <img src="Photos/Logo/site-logo.png" alt="Site Logo" class="nav-logo img-center">
+        - SVGs, JPGs, PNGs, GIFs, and web-friendly formats all work.
+        - If you need an external image, use a full URL: <img src="https://example.com/image.png">
+    -->
+
+    <div class="container">
+        <nav>
+            <div class="nav-brand">
+                <!-- replace the placeholder DIV below with a real image by uncommenting the <img> line and adjusting the src -->
+                <img src="Photos\Logo\Mctr_Logo_v2.png" alt="Site logo" class="nav-logo">
+                <!-- <div class="nav-logo" style="background: var(--primary-color); width: 45px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 0.8rem;">LOGO</div> -->
+                <h2>KS</h2>
+            </div>
+            <a href="Files/Resume/Kistreet_1_page_Coop_Resume_v2.pdf" class="btn" download>Download Resume</a>
+        </nav>
+
+        <header class="hero reveal">
+            <div class="hero-text">
+                <h1>Keiron Street</h1>
+                <h2>Mechatronics & Robotics BSc Co-op Student at the University of Alberta</h2>
+                <p style="max-width: 600px; font-size: 1.2rem; margin-bottom: 30px;">
+                    Seeking an 8-month co-op position starting <strong>May 2026</strong>. <br>
+                    Passionate about bridging the gap between mechanical design, electrical hardware, and control systems.
+                </p>
+            </div>
+            
+            <div class="hero-image-container">
+                <!-- profile picture or any media goes here; can be a PNG, JPG, GIF, etc. -->
+                <!-- example using a GIF: <img src="Photos/Animated/me.gif" alt="fun animation" class="hero-image"> -->
+                <img src="Photos/Profile_Photo/EtlcProfilePhoto_Cropped.JPEG" alt="Keiron Street Profile Photo" class="hero-image" style="margin-left: 50px; margin-right: 10px;">
+            </div>
+        </header>
+
+        <section id="what-is-mechatronics" class="reveal">
+            <h2>What is Mechatronics?</h2>
+            <div class="split-layout">
+                <div class="split-text">
+                    <p style="margin-bottom: 20px;">
+                        Mechatronics is the multidisciplinary intersection of mechanical engineering, electrical engineering, and computer science. Rather than treating these disciplines in isolation, mechatronics focuses on combining them to create smart, automated, and highly efficient systems.
+                    </p>
+                    <p style="margin-bottom: 30px;">
+                        As a mechatronics engineer, I am trained to view a system holistically. Whether working in a purely mechanical role designing structural components, an electrical role routing a PCB, or seamlessly integrating both with software logic, I have the versatile toolkit required to adapt to complex engineering challenges.
+                    </p>
+                    <a href="https://sites.ualberta.ca/~dnobes/Eng_Programs/MecTronE_Visualizer/index.html" class="btn btn-outline" target="_blank" rel="noopener noreferrer">View Current Course Outline</a>
+                </div>
+                <div class="split-media-container">
+                    <div class="media-box">
+                        [Insert Mechatronics Visualizer/Diagram]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-mechatronics" class="reveal">
+            <h2>Why I Chose Mechatronics</h2>
+            <div class="split-layout reverse">
+                <div class="split-text">
+                    <p style="margin-bottom: 20px;">
+                        My path into engineering started with a natural curiosity for how physical systems fit together. From building PCs and intricate Lego sets to the hands-on process of maintaining and tuning vehicles, I have always loved assembling individual components into high-performance machines.
+                    </p>
+                    <p>
+                        I chose mechatronics because it allows me to scale that passion. It provides the formal engineering principles to not just assemble, but to design, automate, and innovate from scratch. I didn't want to be boxed into strictly software or hardware; I wanted the technical foundation to bridge the physical and digital worlds seamlessly.
+                    </p>
+                </div>
+                <div class="split-media-container">
+                    <div class="media-box">
+                        <img src="Photos/Personal_Images/Pc_Inside.JPG" alt="Keiron Street's PC Build" class="img-responsive img-contain">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal">
+            <h2>Who I Am & Engineering Interests</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Beyond the Classroom</h3>
+                    <p>When I'm not designing circuits or working on CAD models, I enjoy staying active with bodybuilding and swimming. I'm also enthusiastic about automotive tuning and maintenance, which reinforces my practical understanding of complex mechanical systems and component integration.</p>
+                </div>
+                <div class="card">
+                    <h3>Core Engineering Interests</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li style="margin-bottom: 10px;"><strong>Automation & Manufacturing:</strong> Streamlining processes and building robust robotic systems for industrial applications.</li>
+                        <li style="margin-bottom: 10px;"><strong>Defense:</strong> Applying high-reliability design principles to mission-critical systems.</li>
+                        <li style="margin-bottom: 10px;"><strong>Project Management:</strong> Leading teams from conceptual design through prototyping and final delivery.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <h2>Technical Skills Showcase</h2>
+            <p>Visual evidence of CAD, PCB design, and programming logic.</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="media-box" style="height: 350px;">
+                        <img src="Photos/Technical_Images/FEA_Bending_Beam.gif" alt="FEA Bending Beam Simulation" class="img-responsive img-contain">
+                    </div>
+                    <h3>Mechanical Design</h3>
+                    <p>Expertise in Fusion 360 and SolidWorks. Capable of performing FEA on structural components.</p>
+                </div>
+                <div class="card">
+                    <div class="media-box" style="height: 200px;">
+                        <img src="Photos/Technical_Images/DAC_v2.png" alt="Altium DAC Schematic" class="img-responsive img-contain">
+                    </div>
+                    <h3>Electrical/Hardware</h3>
+                    <p>Experience with Altium, circuit design, and troubleshooting hardware logic.</p>
+                </div>
+                <div class="card">
+                    <div class="media-box" style="height: 200px;">
+                        [Insert C++ or Microcontroller GIF]
+                    </div>
+                    <h3>Software Integration</h3>
+                    <p>Programming ESP32 microcontrollers using C++ to bridge hardware and software.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2>Featured Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Warehouse Delivery Robot</h3>
+                    <p><strong>Course:</strong> MCTR 260 Mechatronics Design</p>
+                    <p style="margin-top: 10px;">Designed and prototyped an automated delivery robot tailored for warehouse logistics, applying VDI 2206 design methodologies to integrate mechanical chassis design with sensor logic.</p>
+                </div>
+                <div class="card">
+                    <h3>12-bit Digital to Analog Converter</h3>
+                    <p><strong>Independent Project</strong></p>
+                    <p style="margin-top: 10px;">Engineered a 12-bit DAC utilizing an ESP32. Designed the schematic and layout in Altium and wrote the firmware in C++, involving extensive troubleshooting of the physical circuitry.</p>
+                </div>
+                <div class="card">
+                    <h3>UAlberta Aero Design Team</h3>
+                    <p><strong>Extracurricular</strong></p>
+                    <p style="margin-top: 10px;">Responsible for designing and simulating structural components of the aircraft using Fusion 360 and SolidWorks, validating designs through rigorous FEA.</p>
+                </div>
+                <div class="card">
+                    <h3>High-Yield Wind Turbine Design</h3>
+                    <p><strong>Team Lead</strong></p>
+                    <p style="margin-top: 10px;">Led a 5-person engineering team to design a wind turbine that achieved the highest power output in the cohort, focusing on aerodynamic efficiency and team coordination.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses" class="reveal">
+            <h2>Leadership & Coursework</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Relevant Coursework</h3>
+                    <p>Currently completing Winter Term 4 of the Mechatronics and Robotics program. Core coursework focuses on system dynamics, control theory, and mechatronic design (e.g., MCTR 260).</p>
+                </div>
+                <div class="card">
+                    <h3>Team Up Science</h3>
+                    <!-- Linked logo: replace the src with your logo file and href with the project URL -->
+                    <a href="https://teamupscience.ca" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+                        <img src="Photos/Logo/Temaup_Logo.avif" alt="Team Up Science logo" class="team-logo img-responsive">
+                        <span><strong>Engineering Youth Lead</strong></span>
+                    </a>
+                    <p>Creating and leading engaging engineering workshops (EW) to inspire the next generation of STEM students through hands-on technical projects.
+                    </p>
+                    <!-- To change the logo: replace Photos/Logo/teamup_logo.png with your file and update the link above. -->
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p style="margin-top: 10px;">Available for 8-month Co-op term starting May 2026.</p>
+            <p><strong>LinkedIn:</strong><a href="https://www.linkedin.com/in/keiron-street-468520358/"> Keiron-Street</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+
+</body>
+</html>
